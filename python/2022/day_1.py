@@ -7,7 +7,8 @@ def get_calories_from_elf_with_most_calories(input_filepath: Path) -> int:
         sum(elf_calories)
         for elf_calories in group_calories_by_elf(all_calories)
     ]
-    return max(amount_of_calories_per_elf)
+    amount_of_calories_per_elf.sort()
+    return amount_of_calories_per_elf[-1], sum(amount_of_calories_per_elf[-3:])
 
 
 def get_all_calories_from_file(filepath: Path) -> list[str]:
@@ -32,5 +33,5 @@ if __name__ == "__main__":
 
     current_dir = Path(__file__).parent
     input_filepath = current_dir / '../../inputs/2022/day_1.txt'
-    max_calories = get_calories_from_elf_with_most_calories(input_filepath)
-    print(max_calories)
+    max_calories, sum_of_top_thre_calories = get_calories_from_elf_with_most_calories(input_filepath)
+    print(max_calories, sum_of_top_thre_calories)
